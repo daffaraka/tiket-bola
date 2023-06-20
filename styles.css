@@ -1,0 +1,20 @@
+* {
+    padding: unset;
+    margin: unset;
+}
+
+body {
+    min-height: 100vh;
+}
+
+#input-cari {
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%);
+}
+
+.gambar-jadwal {
+    object-fit: cover;
+    height: 30vh;
+}
+
