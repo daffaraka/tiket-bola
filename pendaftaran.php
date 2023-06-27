@@ -1,0 +1,100 @@
+<?php
+include('config.php');
+
+if (isset($_POST["submit"])) {
+    $nama_lengkap = $_POST["nama_lengkap"];
+    $nik = $_POST["nik"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $duplicate = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
+    if (mysqli_num_rows($duplicate) > 0) {
+        echo
+        "<script> alert('Username or Email Has Already Taken'); </script>";
+        header("Location: pendaftaran.php");
+    } else {
+        if ($password) {
+            $query = "INSERT INTO user VALUES(null,'$nama_lengkap','$nik','$email','$password')";
+            mysqli_query($conn, $query);
+            echo
+            "<script> alert('Registration Successful'); </script>";
+            header("Location: login.php");
+        } else {
+            echo
+            "<script> alert('Password Does Not Match'); </script>";
+            header("Location: login.php");
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesanan Saya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light py-4">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">Tiket Bola</a>
+            <div class="d-flex" id="collapsibleNavId">
+                <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pesanan.html">Cek Order <span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Daftar <span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Masuk <span class="visually-hidden">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid p-5 rounded-0 shadow my-5" style="background-image: url('image/rectangle-94.png');">
+        <div class="container">
+
+            <div class="card ">
+                <div class="d-flex justify-content-between p-5">
+                    <form action="" class="w-50 py-5" method="post"> 
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="nama_lengkap" id="" aria-describedby="helpId" placeholder="Nama Lengkap">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" name="nik" id="" aria-describedby="helpId" placeholder="NIK">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" id="" aria-describedby="helpId" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="password" id="" aria-describedby="helpId" placeholder="*****">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="" id="" aria-describedby="helpId" placeholder="*****">
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-outline-dark px-5 py-2 my-3" type="submit" name="submit">Daftar</button>
+
+                        </div>
+                        <p class="text-center">Sudah punya akun? <a href="login.php">Login</a></p>
+                    </form>
+                    <img src="image/pemain.png" class="img-fluid rounded-top" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+
+</html>
