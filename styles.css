@@ -18,3 +18,7 @@ body {
     height: 30vh;
 }
 
+.tiket-active {
+    border: 3px solid green;
+    background-color: unset;
+}
