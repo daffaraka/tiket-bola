@@ -1,34 +1,3 @@
-<?php
-require 'config.php';
-session_start();
-if (!empty($_SESSION["email"])) {
-    header('Location: home.html');
-}
-if (isset($_POST["submit"])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
-
-    $row = mysqli_fetch_assoc($result);
-    if (mysqli_num_rows($result) > 0) {
-        if ($password == $row['password']) {
-            $_SESSION['login'] = true;
-            $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
-            $_SESSION['nik'] = $row['nik'];
-            $_SESSION['email'] = $row['email'];
-            header("Location: home.html");
-        } else {
-            echo
-            "<script> alert('Wrong Password'); </script>";
-        }
-    } else {
-        echo
-        "<script> alert('User Not Registered'); </script>";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +20,7 @@ if (isset($_POST["submit"])) {
                         <a class="nav-link" href="pesanan.html">Cek Order <span class="visually-hidden">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pendaftaran.php">Daftar <span class="visually-hidden">(current)</span></a>
+                        <a class="nav-link" href="pendaftaran.html">Daftar <span class="visually-hidden">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Masuk <span class="visually-hidden">(current)</span></a>
@@ -70,11 +39,11 @@ if (isset($_POST["submit"])) {
                     <div class="px-5">
                         <img src="image/pemain-cewe.svg" class="img- rounded-top" alt="">
                     </div>
-                    <form action="" class="w-50 py-5" method="post">
+                    <form action="home.html" class="w-50 py-5" method="post">
                         <p class="text-center">Masuk ke akun Beli Tiket Anda</p>
                        
                         <div class="mb-3">
-                            <input type="email" class="form-control" name="email" id="" aria-describedby="helpId" placeholder="Email">
+                            <input type="text" class="form-control" name="email" id="" aria-describedby="helpId" placeholder="Email">
                         </div>
 
                         <div class="mb-3">
@@ -85,7 +54,7 @@ if (isset($_POST["submit"])) {
                             <button class="btn btn-outline-dark px-5 py-2 my-3" type="submit" name="submit">Login</button>
 
                         </div>
-                        <p class="text-center">Belum punya akun ? ? <a href="pendaftaran.php">Daftar Sekarang!</a></p>
+                        <p class="text-center">Belum punya akun ? ? <a href="pendaftaran.html">Daftar Sekarang!</a></p>
                     </form>
 
                 </div>
