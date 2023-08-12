@@ -22,3 +22,17 @@ body {
     border: 3px solid green;
     background-color: unset;
 }
+
+.datepicker {
+    position: relative;
+}
+
+.datepicker input[type="date"] {
+    width: 0;
+    height: 0;
+    background-color: unset;
+    border: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
